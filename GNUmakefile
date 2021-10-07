@@ -1,13 +1,3 @@
-#prog=wam
-#
-#ccflags=-pthread
-#ldflags=-pthread -lX11 -lfltk
-#
-##include ../GNUmakefile
-
-prog=wam
-ccflags=-pthread
-ldflags=-pthread -lX11 -lfltk
 prog?=$(basename $(notdir $(PWD)))
 objs+=$(addsuffix .o,$(basename $(wildcard *.c *.cc)))
 
@@ -29,6 +19,6 @@ $(prog): $(objs) ; g++ -o $@ $^ $(ldflags)
 clean: ; rm -f $(prog) *.o *.d *.i
 
 run:      $(prog) ; ./$< $(args)
-valgrind: $(prog) ; $@ --leak-check=full --show-leak-kinds=definite ./$< $(args)
+valgrind: $(prog) ; $@ --leak-check=full --show-leak-kinds=all ./$< $(args)
 
 sinclude *.d
