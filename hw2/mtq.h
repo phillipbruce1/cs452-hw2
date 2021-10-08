@@ -5,8 +5,16 @@
 #ifndef CS452_HW2_MTQ_H
 #define CS452_HW2_MTQ_H
 
-typedef void *Mtq;
+#include "mole.h"
+
+typedef void* Mtq;
+
+extern pthread_mutex_t mutex;
+
+extern void init_mutex();
 
 extern void create_n_threads(int n, void *function, void *params);
+
+extern void mtq_tail_put(Mtq q, Mole m);
 
 #endif //CS452_HW2_MTQ_H

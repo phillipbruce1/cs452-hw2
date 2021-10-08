@@ -17,16 +17,21 @@ static void *produce(void *a) {
     void **args = a;
     Mtq q = (Mtq)args[0];
     Lawn l = (Lawn)args[1];
-    deq_tail_put((Deq) q, mole_new(l, 0, 0));
+    mtq_tail_put((Mtq) q, mole_new(l, 0, 0));
     return 0;
 }
 
-static void consume(void *params) {
-//    mole_whack(deq_head_rem((Mtq) ((Params*)params)->q, deq_head_get((Mtq) ((Params*)params)->q)));
+static void consume(void *a) {
+    void **args = a;
+    Mtq q = (Mtq)args[0];
+    Lawn l = (Lawn)args[1];
+    mole_whack((Mole) deq_tail_rem((Deq) q, deq_tail_get((Deq) q)));
+    return 0;
 }
 
 int main() {
-    Mtq q = deq_new();
+    init_mutex();
+    Mtq *q = &deq_new();
     srandom(time(0));
     const int n = 10;
     Lawn lawn = lawn_new(0, 0);
