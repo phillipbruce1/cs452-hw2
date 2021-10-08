@@ -9,28 +9,31 @@
 #include "mtq.h"
 
 typedef struct Params {
+    Mtq q;
     Lawn lawn;
-    Deq deq;
 } *Params;
 
-static void *produce(void *params) {
-    deq_tail_put((Deq) params->deq, mole_new((Lawn) params->lawn, 0, 0));
-    return deq_tail_get((Deq) params->q);
+static void *produce(void *a) {
+    void **args = a;
+    Mtq q = (Mtq)args[0];
+    Lawn l = (Lawn)args[1];
+    deq_tail_put(q, mole_new(l, 0, 0));
+    return 0;
 }
 
 static void consume(void *params) {
-    mole_whack(deq_head_rem((Deq) params->deq, deq_head_get((deq) params->deq)));
+    mole_whack(deq_head_rem((Mtq) params->q, deq_head_get((Mtq) params->q)));
 }
 
 int main() {
-    Deq q = deq_new();
+    Mtq q = *deq_new();
     srandom(time(0));
     const int n = 10;
     Lawn lawn = lawn_new(0, 0);
 //    for (int i = 1; i <= n; i++)
 //        consume(produce(lawn, q), q);
     Params params = (Params) malloc(sizeof(Params));
-    params->deq = q;
+    params->q = q;
     params->lawn = lawn;
     create_n_threads(10, produce, params);
     lawn_free(lawn);

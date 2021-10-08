@@ -6,5 +6,5 @@
 
 static void create_n_threads(int n, void *function, void *params) {
     for (int i = 0; i < n; i++)
-        pthread_create(i, 0, function, (Lawn) params->lawn, (Deq) params->deq);
+        pthread_create(i, 0, function, params);
 }
