@@ -11,7 +11,7 @@
 typedef struct Params {
     Lawn lawn;
     Deq deq;
-} Params;
+} *Params;
 
 static void *produce(void *params) {
     deq_tail_put((Deq) params->deq, mole_new((Lawn) params->lawn, 0, 0));
@@ -29,9 +29,9 @@ int main() {
     Lawn lawn = lawn_new(0, 0);
 //    for (int i = 1; i <= n; i++)
 //        consume(produce(lawn, q), q);
-    Params *params = (Params) malloc(sizeof(Params));
+    Params params = (Params) malloc(sizeof(Params));
     params->deq = q;
     params->lawn = lawn;
-    create_n_threads(10, produce, *params);
+    create_n_threads(10, produce, params);
     lawn_free(lawn);
 }
