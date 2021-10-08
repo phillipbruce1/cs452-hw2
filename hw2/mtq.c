@@ -4,7 +4,7 @@
 #include "lawn.h"
 #include "deq.h"
 
-pthread_mutex_t mutex = PTHREAD_MUTE_INITIALIZER;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t onPut = PTHREAD_COND_INITIALIZER;
 pthread_cond_t onGet = PTHREAD_COND_INITIALIZER;
 
