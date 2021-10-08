@@ -22,11 +22,11 @@ static void *produce(void *a) {
 }
 
 static void consume(void *params) {
-    mole_whack(deq_head_rem((Mtq) params->q, deq_head_get((Mtq) params->q)));
+//    mole_whack(deq_head_rem((Mtq) ((Params*)params)->q, deq_head_get((Mtq) ((Params*)params)->q)));
 }
 
 int main() {
-    Mtq q = *deq_new();
+    Mtq q = deq_new();
     srandom(time(0));
     const int n = 10;
     Lawn lawn = lawn_new(0, 0);
