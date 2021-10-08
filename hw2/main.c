@@ -25,7 +25,7 @@ static void consume(void *a) {
     void **args = a;
     Deq q = (Deq) args[0];
     Lawn l = (Lawn) args[1];
-    mole_whack(mtq_head_get(q));
+    mole_whack((Mole) mtq_head_get(q));
 }
 
 int main() {
