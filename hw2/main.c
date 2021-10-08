@@ -5,7 +5,7 @@
 
 #include "lawn.h"
 #include "mole.h"
-#include "./deq/deq.h"
+#include "../deq/deq.h"
 
 static Mole produce(Lawn l, Deq q) {
     deq_tail_put(q, mole_new(l, 0, 0));
