@@ -13,7 +13,7 @@ static Mole produce(Lawn l, Deq q) {
 }
 
 static void consume(Mole m, Deq q) {
-    mole_whack(deq_tail_rem(q, m));
+    mole_whack(deq_head_rem(q, m));
 }
 
 int main() {
