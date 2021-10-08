@@ -19,6 +19,6 @@ extern void create_n_threads(int n, void *function, void *params) {
 extern void mtq_tail_put(Mtq q, Mole m) {
     pthread_mutex_lock(&mutex);
     Data d = &m;
-    deq_tail_put((Deq*) *q, d);
+    deq_tail_put((Deq) **q, d);
     pthread_mutex_unlock(&mutex);
 }
