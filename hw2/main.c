@@ -17,7 +17,7 @@ static void *produce(void *a) {
     void **args = a;
     Mtq q = (Mtq)args[0];
     Lawn l = (Lawn)args[1];
-    deq_tail_put(*q, mole_new(l, 0, 0));
+    deq_tail_put((Deq) *q, mole_new(l, 0, 0));
     return 0;
 }
 
