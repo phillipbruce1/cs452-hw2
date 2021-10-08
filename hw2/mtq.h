@@ -14,6 +14,6 @@ extern void create_n_threads(int n, void *function, void *params);
 
 extern void mtq_tail_put(Deq q, Mole m);
 
-extern void mtq_head_get(Deq q);
+extern Data mtq_head_get(Deq q);
 
 #endif //CS452_HW2_MTQ_H
