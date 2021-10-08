@@ -31,7 +31,7 @@ static void consume(void *a) {
 
 int main() {
     init_mutex();
-    Mtq *q = &deq_new();
+    Mtq *q = deq_new();
     srandom(time(0));
     const int n = 10;
     Lawn lawn = lawn_new(0, 0);

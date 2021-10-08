@@ -20,4 +20,5 @@ extern void mtq_tail_put(Mtq q, Mole m) {
     pthread_mutex_lock(&mutex);
     Data d = &m;
     deq_tail_put((Deq) *q, d);
+    pthread_mutex_unlock(&mutex);
 }
