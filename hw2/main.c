@@ -21,7 +21,9 @@ int main() {
     srandom(time(0));
     const int n = 10;
     Lawn lawn = lawn_new(0, 0);
-    for (int i = 1; i <= n; i++)
-        consume(produce(lawn, q), q);
+    for (int i = 1; i <= n; i++) {
+        produce(lawn, q);
+        consume(deq_head_get(q), q);
+    }
     lawn_free(lawn);
 }
