@@ -8,11 +8,6 @@ pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t onPut = PTHREAD_COND_INITIALIZER;
 pthread_cond_t onGet = PTHREAD_COND_INITIALIZER;
 
-extern void create_n_threads(int n, void *function, void *params) {
-    for (int i = 0; i < n; i++)
-        pthread_create(i, 0, function, params);
-}
-
 extern void mtq_tail_put(Deq q, Data d) {
     pthread_mutex_lock(&mutex);
     deq_tail_put(q, d);

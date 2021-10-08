@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+#include <pthread.h>
 
 #include "lawn.h"
 #include "mole.h"
@@ -28,16 +29,37 @@ static void consume(void *a) {
     mole_whack(mtq_head_get(q));
 }
 
+static void create_threads(pthread_t *threads, int n, void *params) {
+    for (int i = 0; i < n * 2; ) {
+        pthread_create(&threads[i++], 0, produce, params);
+        pthread_create(&threads[i++], 0, consume, params);
+    }
+}
+
+static void join_threads(pthread_t *threads, int n) {
+    for (int i = 0; i < n * 2; ) {
+        pthread_join(threads[i++], 0);
+        pthread_join(threads[i++], 0);
+    }
+}
+
 int main() {
-    Deq q = deq_new();
     srandom(time(0));
-    const int n = 10;
+    // initialize vars
+    int n = 14;
+    Deq q = deq_new();
     Lawn lawn = lawn_new(0, 0);
-//    for (int i = 1; i <= n; i++)
-//        consume(produce(lawn, q), q);
+    // initialize params
     Params params = (Params) malloc(sizeof(Params));
     params->q = q;
     params->lawn = lawn;
-    create_n_threads(10, produce, params);
+    // create threads
+    pthread_t threads[n * 2];
+    create_threads(threads, n, params);
+    join_threads(threads, n);
+    // free vars
+    free(params);
+    free_mtq();
     lawn_free(lawn);
+    deq_del(q, 0);
 }
