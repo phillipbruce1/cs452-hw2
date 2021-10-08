@@ -15,17 +15,17 @@ typedef struct Params {
 
 static void *produce(void *a) {
     void **args = a;
-    Deq q = (Deq)args[0];
-    Lawn l = (Lawn)args[1];
+    Deq q = (Deq) args[0];
+    Lawn l = (Lawn) args[1];
     mtq_tail_put(q, mole_new(l, 0, 0));
     return 0;
 }
 
 static void consume(void *a) {
     void **args = a;
-    Deq q = (Deq)args[0];
-    Lawn l = (Lawn)args[1];
-    mole_whack(mtq_head_get(q));
+    Deq q = (Deq) args[0];
+    Lawn l = (Lawn) args[1];
+    mole_whack(*(Mole *) mtq_head_get(q));
 }
 
 int main() {
