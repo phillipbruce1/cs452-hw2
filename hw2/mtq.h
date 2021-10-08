@@ -6,13 +6,14 @@
 #define CS452_HW2_MTQ_H
 
 #include "mole.h"
+#include "deq.h"
 
 typedef void* Mtq;
 
-extern void init_mutex();
-
 extern void create_n_threads(int n, void *function, void *params);
 
-extern void mtq_tail_put(Mtq q, Mole m);
+extern void mtq_tail_put(Deq q, Mole m);
+
+extern void mtq_head_get(Deq q);
 
 #endif //CS452_HW2_MTQ_H

@@ -4,21 +4,34 @@
 #include "lawn.h"
 #include "deq.h"
 
-static pthread_mutex_t mutex;
-
-extern void init_mutex() {
-    pthread_mutex_init(&mutex, 0);
-    return 0;
-}
+pthread_mutex_t mutex = PTHREAD_MUTE_INITIALIZER;
+pthread_cond_t onPut = PTHREAD_COND_INITIALIZER;
+pthread_cond_t onGet = PTHREAD_COND_INITIALIZER;
 
 extern void create_n_threads(int n, void *function, void *params) {
     for (int i = 0; i < n; i++)
         pthread_create(i, 0, function, params);
 }
 
-extern void mtq_tail_put(Mtq q, Mole m) {
+extern void mtq_tail_put(Deq q, Data d) {
     pthread_mutex_lock(&mutex);
-    Data d = &m;
-    deq_tail_put((Deq*) q, d);
+    deq_tail_put(q, d);
+    pthread_cond_signal(&onPut);
     pthread_mutex_unlock(&mutex);
+}
+
+extern Data mtq_head_get(Deq q) {
+    pthread_mutex_lock(&mutex);
+    while (deq_len(q) == 0)
+        pthread_cond_wait(&onPut, &mutex);
+    Data d = deq_head_get(q);
+    pthread_cond_signal(&onGet);
+    pthread_mutex_unlock(&mutex);
+    return d;
+}
+
+extern void free_mtq() {
+    pthread_mutex_destroy(&mutex);
+    pthread_cond_destroy(&onPut);
+    pthread_cond_destroy(&onGet);
 }
