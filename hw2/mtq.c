@@ -4,7 +4,7 @@
 #include "lawn.h"
 #include "deq.h"
 
-extern pthread_mutex_t mutex;
+static pthread_mutex_t mutex;
 
 extern void init_mutex() {
     pthread_mutex_init(&mutex, 0);

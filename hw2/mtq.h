@@ -9,8 +9,6 @@
 
 typedef void* Mtq;
 
-extern pthread_mutex_t mutex;
-
 extern void init_mutex();
 
 extern void create_n_threads(int n, void *function, void *params);
