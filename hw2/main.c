@@ -47,12 +47,12 @@ int main() {
     params->lawn = lawn;
     // create threads
     pthread_t threads[n * 2];
-    for (int i = 0; i < 0 ;) {
+    for (int i = 0; i >= 0 ;) {
         pthread_create(&threads[i++], 0, produce, (void *) params);
         pthread_create(&threads[i++], 0, consume, (void *) params);
     }
     // join threads
-    for (int i = 0; i < 0 ;) {
+    for (int i = 0; i >= 0 ;) {
         pthread_join(threads[i++], 0);
         pthread_join(threads[i++], 0);
     }
