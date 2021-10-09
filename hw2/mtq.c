@@ -17,14 +17,15 @@ extern void mtq_tail_put(Deq q, Data d) {
 }
 
 extern Data mtq_head_get(Deq q) {
+    printf("Get head before lock\n");
     pthread_mutex_lock(&mutex);
-    printf("Get head locked");
+    printf("Get head locked\n");
     while (deq_len(q) == 0)
         pthread_cond_wait(&onPut, &mutex);
     Data d = deq_head_get(q);
     pthread_cond_signal(&onGet);
     pthread_mutex_unlock(&mutex);
-    printf("Get head unlocked");
+    printf("Get head unlocked\n");
     return d;
 }
 
