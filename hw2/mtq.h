@@ -8,8 +8,6 @@
 #include "mole.h"
 #include "deq.h"
 
-typedef void* Mtq;
-
 extern void mtq_tail_put(Deq q, Mole m);
 
 extern Data mtq_head_get(Deq q);
