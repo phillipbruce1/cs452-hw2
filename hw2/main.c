@@ -40,11 +40,12 @@ static void *consume(void *a) {
 int main() {
     srandom(time(0));
     // initialize vars
-    int n = 14;
+    int n = 30;
     Deq q = deq_new();
     Lawn lawn = lawn_new(0, 0);
     // initialize params
-    Params *params = (Params *) malloc(sizeof(Params));
+    Params *params;
+    params = (Params *) malloc(sizeof(Params));
     params->q = q;
     params->lawn = lawn;
     // create threads
