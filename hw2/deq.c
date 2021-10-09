@@ -96,7 +96,6 @@ static Data get(Rep r, End e) {
         r->ht[Head] = 0;
         r->ht[Tail] = 0;
     }
-    free(n);
     // decrement the length of the list, or REPresentation of the list
     r->len--;
     return d;
