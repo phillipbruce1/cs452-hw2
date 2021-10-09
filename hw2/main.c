@@ -17,10 +17,10 @@ typedef struct Params {
 static void* produce(void *a) {
     Params *p;
     p = (Params *) a;
-    Deq q = (Deq) p->q;
-    Lawn l = (Lawn) p->lawn;
-    Data *d = (Data *) mole_new(l, 0, 0);
-    mtq_tail_put(q, *d);
+    Params t = *p;
+    Deq q = t.q;
+    Lawn l = t.lawn;
+    mtq_tail_put(q, mole_new(l, 0, 0));
     return 0;
 }
 
@@ -28,7 +28,7 @@ static void* consume(void *a) {
     Params *p;
     p = (Params *) a;
     Params t = *p;
-    Deq q = (Deq) t.q;
+    Deq q = t.q;
     mole_whack(mtq_head_get(q));
     printf("Consumerism\n");
     return 0;
