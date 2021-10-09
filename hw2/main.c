@@ -25,7 +25,7 @@ static void *produce(void *a) {
 static void *consume(void *a) {
     Params *p = (Params *) a;
     Deq q = (Deq) p->q;
-    mole_whack(mtq_head_get(q));
+    mole_whack((Mole) mtq_head_get(q));
     return 0;
 }
 
