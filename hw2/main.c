@@ -10,8 +10,8 @@
 #include "mtq.h"
 
 typedef struct Params {
-    Deq q;
-    Lawn lawn;
+    Deq* q;
+    Lawn* lawn;
 } Params;
 
 static void *produce(void *a) {
