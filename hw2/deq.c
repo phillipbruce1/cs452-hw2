@@ -91,10 +91,15 @@ static Data ith(Rep r, End e, int i) {
 static Data get(Rep r, End e) {
     // get data from desired Node in the list, or REPresentation of the list
     Data d = r->ht[e]->data;
-    // assign next node to the desired end of the list, or REPresentation of the list
-    r->ht[e] = r->ht[e]->np[(e == Head) ? Tail : Head];
-    // remove the previous end Node from the list, or REPresentation of the list
-    r->ht[e]->np[(e == Head) ? Head : Tail] = 0;
+    if (r->len != 1) {
+        // assign next node to the desired end of the list, or REPresentation of the list
+        r->ht[e] = r->ht[e]->np[(e == Head) ? Tail : Head];
+        // remove the previous end Node from the list, or REPresentation of the list
+        r->ht[e]->np[(e == Head) ? Head : Tail] = 0;
+    } else {
+        r->ht[Head] = 0;
+        r->ht[Tail] = 0;
+    }
     // decrement the length of the list, or REPresentation of the list
     r->len--;
     return d;
