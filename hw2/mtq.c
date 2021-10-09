@@ -1,4 +1,5 @@
 #include <pthread.h>
+#include <stdio.h>
 
 #include "mtq.h"
 #include "lawn.h"
@@ -17,11 +18,13 @@ extern void mtq_tail_put(Deq q, Data d) {
 
 extern Data mtq_head_get(Deq q) {
     pthread_mutex_lock(&mutex);
+    printf("Get head locked");
     while (deq_len(q) == 0)
         pthread_cond_wait(&onPut, &mutex);
     Data d = deq_head_get(q);
     pthread_cond_signal(&onGet);
     pthread_mutex_unlock(&mutex);
+    printf("Get head unlocked");
     return d;
 }
 
