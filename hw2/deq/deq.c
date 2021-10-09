@@ -32,6 +32,7 @@ static Rep rep(Deq q) {
  * @param d - Data to be inserted into list or REPresentation of the list
  */
 static void put(Rep r, End e, Data d) {
+    printf("Deq put function\n");
     // clone node being appended to the list, or REPresentation of the list
     Node t = r->ht[e];
     // instantiate a new node with data d to be added to the list, or REPresentation of the list
