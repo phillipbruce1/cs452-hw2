@@ -18,7 +18,8 @@ static void *produce(void *a) {
     Params *p = (Params *) a;
     Deq q = (Deq) p->q;
     Lawn l = (Lawn) p->lawn;
-    mtq_tail_put(q, mole_new(l, 0, 0));
+    Data *d = (Data *) mole_new(l, 0, 0);
+    mtq_tail_put(q, *d);
     return 0;
 }
 
