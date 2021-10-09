@@ -33,6 +33,20 @@ static void *consume(void *a) {
     return 0;
 }
 
+static void create_threads(pthread_t *threads, void* params) {
+    for (int i = 0; i < n * 2;) {
+        pthread_create(&threads[i++], 0, produce, (void *) params);
+        pthread_create(&threads[i++], 0, consume, (void *) params);
+    }
+}
+
+static void join_threads(pthread_t *threads, void* params) {
+    for (int i = 0; i < n * 2;) {
+        pthread_join(threads[i++], 0);
+        pthread_join(threads[i++], 0);
+    }
+}
+
 int main() {
     srandom(time(0));
     // initialize vars
@@ -46,15 +60,9 @@ int main() {
     params->lawn = lawn;
     // create threads
     pthread_t threads[n * 2];
-    for (int i = 0; i < n * 2;) {
-        pthread_create(&threads[i++], 0, produce, (void *) params);
-        pthread_create(&threads[i++], 0, consume, (void *) params);
-    }
+    create_threads(threads, params);
     // join threads
-    for (int i = 0; i < n * 2;) {
-        pthread_join(threads[i++], 0);
-        pthread_join(threads[i++], 0);
-    }
+    join_threads(threads, params);
     // free vars
     free(params);
     free_mtq();
