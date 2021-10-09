@@ -28,8 +28,8 @@ static void *produce(void *a) {
     p = (Params *) a;
     Params t = *p;
     // get parameters
-    Deq q = t.q;
-    Lawn l = t.lawn;
+    Deq q = p->q;
+    Lawn l = p->lawn;
     // put new Mole in Mtq
     mtq_tail_put(q, mole_new(l, 0, 0));
     return 0;
@@ -46,7 +46,7 @@ static void *consume(void *a) {
     p = (Params *) a;
     Params t = *p;
     // get Deq
-    Deq q = t.q;
+    Deq q = p->q;
     // whack the mole >:)
     mole_whack(mtq_head_get(q));
     return 0;
