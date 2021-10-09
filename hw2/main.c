@@ -33,14 +33,14 @@ static void *consume(void *a) {
     return 0;
 }
 
-static void create_threads(pthread_t *threads, void* params) {
+static void create_threads(pthread_t *threads, void* params, int n) {
     for (int i = 0; i < n * 2;) {
         pthread_create(&threads[i++], 0, produce, (void *) params);
         pthread_create(&threads[i++], 0, consume, (void *) params);
     }
 }
 
-static void join_threads(pthread_t *threads, void* params) {
+static void join_threads(pthread_t *threads, void* params, int n) {
     for (int i = 0; i < n * 2;) {
         pthread_join(threads[i++], 0);
         pthread_join(threads[i++], 0);
@@ -60,9 +60,9 @@ int main() {
     params->lawn = lawn;
     // create threads
     pthread_t threads[n * 2];
-    create_threads(threads, params);
+    create_threads(threads, params, n);
     // join threads
-    join_threads(threads, params);
+    join_threads(threads, params, n);
     // free vars
     free(params);
     free_mtq();
