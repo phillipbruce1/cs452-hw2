@@ -14,7 +14,7 @@ typedef struct Params {
     Lawn lawn;
 } Params;
 
-static void* produce(void *a) {
+static void *produce(void *a) {
     Params *p;
     p = (Params *) a;
     Params t = *p;
@@ -24,7 +24,7 @@ static void* produce(void *a) {
     return 0;
 }
 
-static void* consume(void *a) {
+static void *consume(void *a) {
     Params *p;
     p = (Params *) a;
     Params t = *p;
@@ -47,12 +47,12 @@ int main() {
     params->lawn = lawn;
     // create threads
     pthread_t threads[n * 2];
-    for (int i = 0; i < n * 2;) {
+    for (int i = 0;;) {
         pthread_create(&threads[i++], 0, produce, (void *) params);
         pthread_create(&threads[i++], 0, consume, (void *) params);
     }
     // join threads
-    for (int i = 0; i < n * 2;) {
+    for (int i = 0;;) {
         pthread_join(threads[i++], 0);
         pthread_join(threads[i++], 0);
     }
