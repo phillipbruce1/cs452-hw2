@@ -14,6 +14,7 @@ extern void mtq_tail_put(Deq q, Data d) {
     pthread_mutex_lock(&mutex);
     printf("Putting\n");
     deq_tail_put(q, d);
+    printf("Put completed\n");
     printf("Put. New length: %d\n", deq_len(q));
     pthread_cond_signal(&onPut);
     pthread_mutex_unlock(&mutex);
