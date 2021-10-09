@@ -21,6 +21,7 @@ static void *produce(void *a) {
     Deq q = t.q;
     Lawn l = t.lawn;
     mtq_tail_put(q, mole_new(l, 0, 0));
+    free(p);
     return 0;
 }
 
@@ -30,6 +31,7 @@ static void *consume(void *a) {
     Params t = *p;
     Deq q = t.q;
     mole_whack(mtq_head_get(q));
+    free(p);
     return 0;
 }
 
