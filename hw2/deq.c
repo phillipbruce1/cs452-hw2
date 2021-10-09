@@ -48,7 +48,12 @@ static void put(Rep r, End e, Data d) {
         t->np[(e == Head) ? Head : Tail] = n;
     }
     // add Node n back into the list, or REPresentation of the list
-    r->ht[e] = n;
+    if (r->len == 0) {
+        r->ht[Head] = n;
+        r->ht[Tail] = n;
+    } else {
+        r->ht[e] = n;
+    }
     printf("TIME FOR LENGTH\n");
     // increment length of the list, or REPresentation of the list
     r->len++;
