@@ -22,7 +22,7 @@ extern Data mtq_head_get(Deq q) {
     printf("Get head locked\n");
     while (deq_len(q) == 0)
         pthread_cond_wait(&onPut, &mutex);
-    printd("Time to get head\n");
+    printf("Time to get head\n");
     Data d = deq_head_get(q);
     pthread_cond_signal(&onGet);
     pthread_mutex_unlock(&mutex);
