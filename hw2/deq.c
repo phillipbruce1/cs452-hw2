@@ -93,8 +93,6 @@ static Data get(Rep r, End e) {
         // remove the previous end Node from the list, or REPresentation of the list
         r->ht[e]->np[(e == Head) ? Head : Tail] = 0;
     } else {
-        free(r->ht[Head]);
-        free(r->ht[Tail]);
         r->ht[Head] = 0;
         r->ht[Tail] = 0;
     }
