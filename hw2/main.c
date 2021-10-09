@@ -6,7 +6,7 @@
 
 #include "lawn.h"
 #include "mole.h"
-#include "deq.h"
+#include "libdeq.h"
 #include "mtq.h"
 
 typedef struct Params {

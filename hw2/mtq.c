@@ -3,7 +3,7 @@
 
 #include "mtq.h"
 #include "lawn.h"
-#include "deq.h"
+#include "libdeq.h"
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t onPut = PTHREAD_COND_INITIALIZER;
