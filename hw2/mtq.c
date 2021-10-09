@@ -10,6 +10,7 @@ pthread_cond_t onPut = PTHREAD_COND_INITIALIZER;
 pthread_cond_t onGet = PTHREAD_COND_INITIALIZER;
 
 extern void mtq_tail_put(Deq q, Data d) {
+    printf("Put before lock\n");
     pthread_mutex_lock(&mutex);
     printf("Putting\n");
     deq_tail_put(q, d);
