@@ -57,8 +57,15 @@ int main() {
     params->lawn = lawn;
     // create threads
     pthread_t threads[n * 2];
-    create_threads(threads, n, (void *) params);
-    join_threads(threads, n);
+    for (int i = 0; i < n * 2;) {
+        pthread_create(&threads[i++], 0, produce, (void *) params);
+        pthread_create(&threads[i++], 0, consume, (void *) params);
+    }
+    // join threads
+    for (int i = 0; i < n * 2;) {
+        pthread_join(threads[i++], 0);
+        pthread_join(threads[i++], 0);
+    }
     // free vars
     free(params);
     free_mtq();
