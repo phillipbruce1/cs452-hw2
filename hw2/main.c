@@ -28,7 +28,7 @@ static void* consume(void *a) {
     Params *p;
     p = (Params *) a;
     Deq q = (Deq) p->q;
-    mole_whack(mtq_head_get(q));
+    mole_whack((Mole) mtq_head_get(q));
     printf("Consumerism\n");
     return 0;
 }

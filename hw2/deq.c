@@ -33,27 +33,59 @@ static Rep rep(Deq q) {
  * @param d - Data to be inserted into list or REPresentation of the list
  */
 static void put(Rep r, End e, Data d) {
-    // clone node being appended to the list, or REPresentation of the list
-    Node t = r->ht[e];
-    // instantiate a new node with data d to be added to the list, or REPresentation of the list
-    Node n = (Node) malloc(sizeof(Node));
-    // store data in Node n to be store in the list, or REPresentation of the list
-    n->data = d;
-    if (r->len != 0) {
-        // add Node t as next or previous respectively in Node n in the list, or REPresentation of the list
-        n->np[(e == Head) ? Tail : Head] = t;
-        // set Node t's next or previous respectively to Node n in the list, or REPresentation of the list
-        t->np[(e == Head) ? Head : Tail] = n;
+    //This section adds at the tail
+    if (e == Tail) {
+        Node start = malloc(sizeof(struct Node));
+        memset(start, 0, sizeof(*start));
+        start->data = d;
+        if (r->len == 0) {
+            r->ht[Tail] = start;
+            r->ht[Head] = start;
+        } else {
+            Node prevTail = r->ht[Tail];
+            r->ht[Tail] = start;
+            prevTail->np[Tail] = start;
+            start->np[Head] = prevTail;
+        }
+        r->len = r->len + 1;
     }
-    // add Node n back into the list, or REPresentation of the list
-    if (r->len == 0) {
-        r->ht[Head] = n;
-        r->ht[Tail] = n;
-    } else {
-        r->ht[e] = n;
+    //This section adds at the head
+    if (e == Head) {
+        Node start = malloc(sizeof(struct Node));
+        memset(start, 0, sizeof(*start));
+        start->data = d;
+        if (r->len == 0) {
+            r->ht[Head] = start;
+            r->ht[Tail] = start;
+        } else {
+            Node prevHead = r->ht[Head];
+            r->ht[Head] = start;
+            prevHead->np[Head] = start;
+            start->np[Tail] = prevHead;
+        }
+        r->len = r->len + 1;
     }
-    // increment length of the list, or REPresentation of the list
-    r->len++;
+//    // clone node being appended to the list, or REPresentation of the list
+//    Node t = r->ht[e];
+//    // instantiate a new node with data d to be added to the list, or REPresentation of the list
+//    Node n = (Node) malloc(sizeof(Node));
+//    // store data in Node n to be store in the list, or REPresentation of the list
+//    n->data = d;
+//    if (r->len != 0) {
+//        // add Node t as next or previous respectively in Node n in the list, or REPresentation of the list
+//        n->np[(e == Head) ? Tail : Head] = t;
+//        // set Node t's next or previous respectively to Node n in the list, or REPresentation of the list
+//        t->np[(e == Head) ? Head : Tail] = n;
+//    }
+//    // add Node n back into the list, or REPresentation of the list
+//    if (r->len == 0) {
+//        r->ht[Head] = n;
+//        r->ht[Tail] = n;
+//    } else {
+//        r->ht[e] = n;
+//    }
+//    // increment length of the list, or REPresentation of the list
+//    r->len++;
 }
 
 /**
@@ -85,20 +117,62 @@ static Data ith(Rep r, End e, int i) {
  * @return - Data retrieved from the list, or REPresentation of the list
  */
 static Data get(Rep r, End e) {
-    // get data from desired Node in the list, or REPresentation of the list
-    Data d = r->ht[e]->data;
-    if (r->len != 1) {
-        // assign next node to the desired end of the list, or REPresentation of the list
-        r->ht[e] = r->ht[e]->np[(e == Head) ? Tail : Head];
-        // remove the previous end Node from the list, or REPresentation of the list
-        r->ht[e]->np[(e == Head) ? Head : Tail] = 0;
-    } else {
-        r->ht[Head] = 0;
-        r->ht[Tail] = 0;
+    if (r->len > 2) {
+        Data d = r->ht[e]->data;
+        int i = 0;
+        if (e == Head) {
+            i = 1;
+        }
+        Node nxpvNode = r->ht[e]->np[i];
+        nxpvNode->np[e] = NULL;
+        free(r->ht[e]);
+        r->ht[e] = nxpvNode;
+        r->len = r->len - 1;
+        return d;
     }
-    // decrement the length of the list, or REPresentation of the list
-    r->len--;
-    return d;
+    if (r->len == 2) {
+        Data d = r->ht[e]->data;
+        int i = 0;
+        if (e == Head) {
+            i = 1;
+        }
+        Node nxpvNode = r->ht[e]->np[i];
+        nxpvNode->np[Head] = NULL;
+        nxpvNode->np[Tail] = NULL;
+        free(r->ht[e]);
+        r->ht[Head] = nxpvNode;
+        r->ht[Tail] = nxpvNode;
+        r->len = r->len - 1;
+        return d;
+    }
+    if (r->len == 1) {
+        Node back = r->ht[e];
+        r->ht[Head] = NULL;
+        r->ht[Tail] = NULL;
+        free(r->ht[e]);
+        r->len = r->len - 1;
+        return back->data;
+    }
+    //case for empty list
+    if (r->len == 0) {
+        printf("List is empty, can't remove.\n");
+        return NULL;
+    }
+    return 0;
+//    // get data from desired Node in the list, or REPresentation of the list
+//    Data d = r->ht[e]->data;
+//    if (r->len != 1) {
+//        // assign next node to the desired end of the list, or REPresentation of the list
+//        r->ht[e] = r->ht[e]->np[(e == Head) ? Tail : Head];
+//        // remove the previous end Node from the list, or REPresentation of the list
+//        r->ht[e]->np[(e == Head) ? Head : Tail] = 0;
+//    } else {
+//        r->ht[Head] = 0;
+//        r->ht[Tail] = 0;
+//    }
+//    // decrement the length of the list, or REPresentation of the list
+//    r->len--;
+//    return d;
 }
 
 /**
