@@ -38,6 +38,7 @@ static void put(Rep r, End e, Data d) {
     Node t = r->ht[e];
     // instantiate a new node with data d to be added to the list, or REPresentation of the list
     Node n = (Node) malloc(sizeof(Node));
+    printf("MALLOC COMPLETED\n");
     // store data in Node n to be store in the list, or REPresentation of the list
     n->data = d;
     // add Node t as next or previous respectively in Node n in the list, or REPresentation of the list
