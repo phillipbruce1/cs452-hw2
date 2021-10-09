@@ -24,4 +24,6 @@ One lonely afternoon, I developed the courage to fight back. These moles have no
 
 ... or so I thought. Unfortunately, some live on in the form of memory leaks. They can be seen in the included screenshot results after running Valgrind. I was unable to rid myself of these bugs, but I think that getting the program to at least run is still an achievement.
 
+![Valgrind results](./Valgrind.PNG)
+
 Other than that, I definitely struggled with threads and things and stuff at first as I worked to understand mutexes, locks, and condition variables. By the end of it all, I feel that I have learned from this assignment though.
