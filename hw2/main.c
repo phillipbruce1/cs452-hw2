@@ -10,8 +10,8 @@
 #include "mtq.h"
 
 typedef struct Params {
-    Deq* q;
-    Lawn* lawn;
+    Deq q;
+    Lawn lawn;
 } Params;
 
 static void *produce(void *a) {
@@ -36,7 +36,7 @@ static void *consume(void *a) {
 int main() {
     srandom(time(0));
     // initialize vars
-    int n = 30;
+    int n = 50;
     Deq q = deq_new();
     Lawn lawn = lawn_new(0, 0);
     // initialize params
