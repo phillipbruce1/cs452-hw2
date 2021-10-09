@@ -47,6 +47,7 @@ int main() {
         pthread_create(&threads[i++], 0, produce, (void *) params);
         pthread_create(&threads[i++], 0, consume, (void *) params);
     }
+    sleep(5);
     // join threads
     for (int i = 0; i < n * 2;) {
         pthread_join(threads[i++], 0);
