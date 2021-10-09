@@ -37,7 +37,7 @@ static void put(Rep r, End e, Data d) {
     // instantiate a new node with data d to be added to the list, or REPresentation of the list
     Node n = (Node) malloc(sizeof(Node));
     // store data in Node n to be store in the list, or REPresentation of the list
-    n->data = &d;
+    n->data = d;
     if (r->len != 0) {
         // add Node t as next or previous respectively in Node n in the list, or REPresentation of the list
         n->np[(e == Head) ? Tail : Head] = t;
