@@ -6,7 +6,7 @@
 #define CS452_HW2_MTQ_H
 
 #include "mole.h"
-#include "libdeq.h"
+#include "libdeq.so"
 
 typedef void* Mtq;
 
