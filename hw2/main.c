@@ -26,7 +26,6 @@ static void *produce(void *a) {
     // cast a to a Params pointer
     Params *p;
     p = (Params *) a;
-    Params t = *p;
     // get parameters
     Deq q = p->q;
     Lawn l = p->lawn;
@@ -44,7 +43,6 @@ static void *consume(void *a) {
     // cast a to a Params pointer
     Params *p;
     p = (Params *) a;
-    Params t = *p;
     // get Deq
     Deq q = p->q;
     // whack the mole >:)
