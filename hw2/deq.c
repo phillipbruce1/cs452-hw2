@@ -36,6 +36,7 @@ static void put(Rep r, End e, Data d) {
     Node t = r->ht[e];
     // instantiate a new node with data d to be added to the list, or REPresentation of the list
     Node n = (Node) malloc(sizeof(Node));
+    memset(n, 0, sizeof(*n));
     // store data in Node n to be store in the list, or REPresentation of the list
     n->data = d;
     if (r->len != 0) {
@@ -92,6 +93,8 @@ static Data get(Rep r, End e) {
         // remove the previous end Node from the list, or REPresentation of the list
         r->ht[e]->np[(e == Head) ? Head : Tail] = 0;
     } else {
+        free(r->ht[Head]);
+        free(r->ht[Tail]);
         r->ht[Head] = 0;
         r->ht[Tail] = 0;
     }
