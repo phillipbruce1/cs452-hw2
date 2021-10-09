@@ -23,7 +23,7 @@ static void *produce(void *a) {
 //    return 0;
     void **args = a;
     Deq q = (Deq)args[0];
-    printf("L E N G T H: %d", deq_len(q));
+    printf("L E N G T H: %d\n", deq_len(q));
     Lawn l = (Lawn)args[1];
     mtq_tail_put(q, mole_new(l, 0, 0));
     return 0;
