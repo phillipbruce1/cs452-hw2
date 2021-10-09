@@ -20,9 +20,11 @@ extern Data mtq_head_get(Deq q) {
     printf("Get head before lock\n");
     pthread_mutex_lock(&mutex);
     printf("Get head locked\n");
-    printf("%d\n", deq_len(q));
-    while (deq_len(q) == 0)
+    while (deq_len(q) == 0) {
+        printf("%d\n", deq_len(q));
         pthread_cond_wait(&onPut, &mutex);
+        printf("Still waiting");
+    }
     printf("Time to get head\n");
     Data d = deq_head_get(q);
     pthread_cond_signal(&onGet);
