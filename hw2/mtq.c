@@ -12,6 +12,7 @@ pthread_cond_t onGet = PTHREAD_COND_INITIALIZER;
 extern void mtq_tail_put(Deq q, Data d) {
     pthread_mutex_lock(&mutex);
     deq_tail_put(q, d);
+    printf("%d", deq_len(q));
     pthread_cond_signal(&onPut);
     pthread_mutex_unlock(&mutex);
 }
