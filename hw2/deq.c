@@ -39,14 +39,14 @@ static void put(Rep r, End e, Data d) {
     // instantiate a new node with data d to be added to the list, or REPresentation of the list
     Node n = (Node) malloc(sizeof(Node));
     printf("MALLOC COMPLETED\n");
-    memset(n, 0, sizeof(*n));
-    printf("MEMSET\n");
     // store data in Node n to be store in the list, or REPresentation of the list
     n->data = d;
-    // add Node t as next or previous respectively in Node n in the list, or REPresentation of the list
-    n->np[(e == Head) ? Tail : Head] = t;
-    // set Node t's next or previous respectively to Node n in the list, or REPresentation of the list
-    t->np[(e == Head) ? Head : Tail] = n;
+    if (r->len != 0) {
+        // add Node t as next or previous respectively in Node n in the list, or REPresentation of the list
+        n->np[(e == Head) ? Tail : Head] = t;
+        // set Node t's next or previous respectively to Node n in the list, or REPresentation of the list
+        t->np[(e == Head) ? Head : Tail] = n;
+    }
     // add Node n back into the list, or REPresentation of the list
     r->ht[e] = n;
     printf("TIME FOR LENGTH\n");
