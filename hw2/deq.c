@@ -37,7 +37,7 @@ static void put(Rep r, End e, Data d) {
     // instantiate a new node with data d to be added to the list, or REPresentation of the list
     Node n = (Node) malloc(sizeof(Node));
     // store data in Node n to be store in the list, or REPresentation of the list
-    n->data = *d;
+    n->data = d;
     if (r->len != 0) {
         // add Node t as next or previous respectively in Node n in the list, or REPresentation of the list
         n->np[(e == Head) ? Tail : Head] = t;
@@ -85,7 +85,7 @@ static Data ith(Rep r, End e, int i) {
  */
 static Data get(Rep r, End e) {
     // get data from desired Node in the list, or REPresentation of the list
-    Data d = *(r->ht[e]->data);
+    Data d = r->ht[e]->data;
     if (r->len != 1) {
         // assign next node to the desired end of the list, or REPresentation of the list
         r->ht[e] = r->ht[e]->np[(e == Head) ? Tail : Head];
