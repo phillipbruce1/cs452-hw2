@@ -21,6 +21,7 @@ typedef struct {
 } *Rep;
 
 static Rep rep(Deq q) {
+    printf("REP\n");
     if (!q) ERROR("zero pointer");
     return (Rep) q;
 }

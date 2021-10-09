@@ -13,7 +13,7 @@ extern void mtq_tail_put(Deq q, Data d) {
     printf("Put before lock\n");
     pthread_mutex_lock(&mutex);
     printf("Putting\n");
-    deq_head_put(q, d);
+    deq_tail_put(q, d);
     printf("Put. New length: %d\n", deq_len(q));
     pthread_cond_signal(&onPut);
     pthread_mutex_unlock(&mutex);
@@ -30,7 +30,7 @@ extern Data mtq_head_get(Deq q) {
         printf("Still waiting");
     }
     printf("Time to get head\n");
-    Data d = deq_tail_get(q);
+    Data d = deq_head_get(q);
     pthread_cond_signal(&onGet);
     pthread_mutex_unlock(&mutex);
     printf("Get head unlocked\n");
