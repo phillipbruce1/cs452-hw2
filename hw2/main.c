@@ -15,7 +15,8 @@ typedef struct Params {
 } Params;
 
 static void* produce(void *a) {
-    Params *p = (Params *) a;
+    Params *p;
+    p = (Params *) a;
     Deq q = (Deq) p->q;
     Lawn l = (Lawn) p->lawn;
     Data *d = (Data *) mole_new(l, 0, 0);
@@ -24,9 +25,10 @@ static void* produce(void *a) {
 }
 
 static void* consume(void *a) {
-    Params *p = (Params *) a;
+    Params *p;
+    p = (Params *) a;
     Deq q = (Deq) p->q;
-    mole_whack((Mole) mtq_head_get(q));
+    mole_whack(mtq_head_get(q));
     printf("Consumerism\n");
     return 0;
 }
