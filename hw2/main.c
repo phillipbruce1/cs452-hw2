@@ -15,8 +15,7 @@ typedef struct Params {
 } Params;
 
 static void *produce(void *a) {
-    void **args = a;
-    Params p = (Params *) a;
+    Params *p = (Params *) a;
     Deq q = (Deq) p->q;
     Lawn l = (Lawn) p->lawn;
     mtq_tail_put(q, mole_new(l, 0, 0));
@@ -24,8 +23,7 @@ static void *produce(void *a) {
 }
 
 static void *consume(void *a) {
-    void **args = a;
-    Params p = (Params *) a;
+    Params *p = (Params *) a;
     Deq q = (Deq) p->q;
     mole_whack(mtq_head_get(q));
     return 0;
