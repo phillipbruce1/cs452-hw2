@@ -30,7 +30,6 @@ static void *consume(void *a) {
     Params t = *p;
     Deq q = t.q;
     mole_whack(mtq_head_get(q));
-    printf("Consumerism\n");
     return 0;
 }
 
