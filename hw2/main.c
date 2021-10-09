@@ -36,7 +36,7 @@ static void *consume(void *a) {
 int main() {
     srandom(time(0));
     // initialize vars
-    int n = 50;
+    int n = 100;
     Deq q = deq_new();
     Lawn lawn = lawn_new(0, 0);
     // initialize params
