@@ -51,16 +51,16 @@ int main() {
     // create threads
     pthread_t threads[n * 2];
     for (int i = 0; i < n * 2;) {
-        pthread_create(&threads[i++], 0, produce, (void *) params);
-        pthread_create(&threads[i++], 0, consume, (void *) params);
+        pthread_create(&threads[i++], NULL, produce, (void *) params);
+        pthread_create(&threads[i++], NULL, consume, (void *) params);
     }
     printf("Waiting\n");
     sleep(5);
     printf("Going again\n");
     // join threads
     for (int i = 0; i < n * 2;) {
-        pthread_join(threads[i++], 0);
-        pthread_join(threads[i++], 0);
+        pthread_join(threads[i++], NULL);
+        pthread_join(threads[i++], NULL);
     }
     // free vars
     free(params);
