@@ -15,11 +15,16 @@ typedef struct Params {
 } Params;
 
 static void *produce(void *a) {
-    Params *p = (Params *) a;
-    Deq q = (Deq) p->q;
-    Lawn l = (Lawn) p->lawn;
-    Data *d = (Data *) mole_new(l, 0, 0);
-    mtq_tail_put(q, *d);
+//    Params *p = (Params *) a;
+//    Deq q = (Deq) p->q;
+//    Lawn l = (Lawn) p->lawn;
+//    Data *d = (Data *) mole_new(l, 0, 0);
+//    mtq_tail_put(q, *d);
+//    return 0;
+    void **args = a;
+    Deq q = (Deq)args[0];
+    Lawn l = (Lawn)args[1];
+    mtq_tail_put(q, mole_new(l, 0, 0));
     return 0;
 }
 
